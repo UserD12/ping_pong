@@ -8,9 +8,11 @@ clock = time.Clock()
 FPS = 60
 
 game = True
+finish = False
 
 win_height = 500
-
+speed_x = 3
+speed_y = 3
 class GameSprite(sprite.Sprite):
     def __init__(self, player_image, player_x, player_y, player_speed, player_width, player_height):
         super().__init__()
@@ -48,11 +50,14 @@ while game:
     for e in event.get():
         if e.type == QUIT:
             game = False#задай фон сцены
-    player1.update_l()
-    player1.reset()
-    ball.reset()
-    player2.update_r()
-    player2.reset()
+    if finish != True:
+        player1.update_l()
+        player1.reset()
+        ball.reset()
+        player2.update_r()
+        player2.reset()
+        ball.rect.x += speed_x
+        ball.rect.y +=speed_y
 
     display.update()
     clock.tick(FPS)
