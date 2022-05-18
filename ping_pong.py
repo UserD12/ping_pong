@@ -37,6 +37,8 @@ class Player(GameSprite):
         if keys[K_s] and self.rect.y < win_height - 155:
             self.rect.y += self.speed
 
+
+ball = GameSprite('shar.png',325,250,5,50,50)
 player1 = Player('raketka.png', 30, 200, 4, 20, 150)
 player2 = Player('raketka.png', 650, 200, 4, 20, 150)
 
@@ -48,6 +50,7 @@ while game:
             game = False#задай фон сцены
     player1.update_l()
     player1.reset()
+    ball.reset()
     player2.update_r()
     player2.reset()
 
