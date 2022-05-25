@@ -44,6 +44,11 @@ ball = GameSprite('shar.png',325,250,5,50,50)
 player1 = Player('raketka.png', 30, 200, 4, 20, 150)
 player2 = Player('raketka.png', 650, 200, 4, 20, 150)
 
+font.init()
+font1 = font.SysFont('Arial', 36)
+text_lose = font1.render('Игрок 1 выиграл',True, (255, 255, 255))
+text_win = font1.render('Игрок 2 выиграл',True, (255, 255, 255))
+
 while game:
     window.blit(background, (0,0))
 
@@ -58,6 +63,21 @@ while game:
         player2.reset()
         ball.rect.x += speed_x
         ball.rect.y +=speed_y
+
+    if ball.rect.y > win_height - 50 or ball.rect.y < 0:
+        speed_y *= -1
+
+
+    if sprite.collide_rect(player1, ball) or sprite.collide_rect(player2, ball):
+        speed_x *= -1
+        ball.speed += 100
+
+    if ball.rect.x < 0:
+        finish = True
+        window.blit(text_win, (200,200))
+    if ball.rect.x > 700:
+        finish = True
+        window.blit(text_lose, (200,200))
 
     display.update()
     clock.tick(FPS)
